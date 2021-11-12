@@ -48,7 +48,13 @@ $endif$
 \newcommand{\keywordspl}{$keywords-pl$}
 \newcommand{\keywordsen}{$keywords-en$}
 
-\EngineerThesis % Praca inżynierska
+\newcommand{\engineerthesis}{\EngineerThesis}
+\newcommand{\masterthesis}{\MasterThesis}
+$if(thesistype)$
+\$thesistype$thesis
+$else$
+\engineerthesis
+$endif$
 $if(lang)$
     \lang$lang$
 $else$

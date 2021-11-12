@@ -7,6 +7,7 @@ institute: "{Instytut}"
 faculty: "eiti"
 specialty: "{Specjalność}"
 subject: "{Kierunek}"
+thesistype: engineer # master lub engineer
 parindent: false # Wyłączenie akapitów
 citecolor: 77C000 # Kolor cytowań
 urlcolor: 0000FF # Kolor url
