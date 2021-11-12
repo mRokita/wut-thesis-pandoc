@@ -1,0 +1,190 @@
+
+% !TeX TS-program = pdflatexmk
+% !BIB TS-program = biber
+
+%-----------------------------------------------
+%  Engineer's & Master's Thesis Template
+%  Copyleft by Artur M. Brodzki & Piotr Woźniak
+%  Warsaw University of Technology, 2019-2021
+%-----------------------------------------------
+
+\documentclass[
+    bindingoffset=5mm,  % Binding offset
+    footnoteindent=3mm, % Footnote indent
+    hyphenation=true    % Hyphenation turn on/off
+]{include/wut-thesis}
+
+
+%-------------------------------------------------------------
+% Wybór wydziału:
+%  \facultyeiti: Wydział Elektroniki i Technik Informacyjnych
+%  \facultymeil: Wydział Mechaniczny Energetyki i Lotnictwa
+% --
+% Rodzaj pracy: \EngineerThesis, \MasterThesis
+% --
+% Wybór języka: \langpol, \langeng
+%-------------------------------------------------------------
+\facultyeiti    % Wydział Elektroniki i Technik Informacyjnych
+\EngineerThesis % Praca inżynierska
+\langpol % Praca w języku polskim
+\usepackage{float}
+
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+$endif$
+\usepackage{graphicx}
+\usepackage[backend=biber]{biblatex}
+
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+$endif$
+
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+
+% Redefine \includegraphics so that, unless explicit options are
+% given, the image width will not exceed the width or the height of the page.
+% Images get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\ScaleWidthIfNeeded{%
+ \ifdim\Gin@nat@width>\linewidth
+    0.9\linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\def\ScaleHeightIfNeeded{%
+  \ifdim\Gin@nat@height>0.9\textheight
+    0.9\textheight
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+
+
+\begin{document}
+
+%------------------
+% Strona tytułowa
+%------------------
+\instytut{$institute$}
+\kierunek{$subject$}
+\specjalnosc{$specialty$}
+\title{
+    $title-pl$
+}
+% Tytuł po angielsku do angielskiego streszczenia
+% In english theses, you may remove this command
+\engtitle{
+    $title-en$
+}
+\author{$author$}
+\album{$album$}
+\promotor{$promotor$}
+\date{\the\year}
+\maketitle
+
+%-------------------------
+% Streszczenie po polsku
+%-------------------------
+\cleardoublepage % Zaczynamy od nieparzystej strony
+\streszczenie $abstract-pl$
+\slowakluczowe $keywords-pl$
+
+%----------------------------
+% Streszczenie po angielsku
+%----------------------------
+\clearpage
+\abstract $abstract-en$
+\keywords $keywords-en$
+
+%----------------------------
+% Oświadczenie o autorstwie
+%----------------------------
+\cleardoublepage % Zaczynamy od nieparzystej strony
+\pagestyle{plain}
+\makeauthorship
+
+%--------------
+% Spis treści
+%--------------
+\cleardoublepage % Zaczynamy od nieparzystej strony
+\tableofcontents
+
+%------------
+% Rozdziały
+%------------
+\cleardoublepage % Zaczynamy od nieparzystej strony
+\pagestyle{headings}
+
+ % Można też pisać rozdziały w jednym pliku.
+\clearpage % Zawsze zaczynamy rozdział od nowej strony
+
+\floatplacement{figure}{H}
+
+\setkeys{Gin}{width=\ScaleWidthIfNeeded,height=\ScaleHeightIfNeeded,keepaspectratio}%
+
+$body$
+
+%---------------
+% Bibliografia
+%---------------
+
+\cleardoublepage % Zaczynamy od nieparzystej strony
+
+\nocite{*}
+\printbibliography
+
+%--------------------------------------
+% Spisy: rysunków, tabel, załączników
+%--------------------------------------
+\clearpage
+\pagestyle{plain}
+
+\listoffigurestoc    % Spis rysunków.
+\vspace{1cm}         % vertical space
+
+\listoftablestoc     % Spis tabel.
+\vspace{1cm}         % vertical space
+
+$if(enableappendices)$
+\listofappendicestoc % Spis załączników
+$endif$
+% Wykaz symboli i skrótów.
+% Pamiętaj, żeby posortować symbole alfabetycznie
+% we własnym zakresie. Makro \acronymlist
+% generuje właściwy tytuł sekcji, w zależności od języka.
+% Makro \acronym dodaje skrót/symbol do listy,
+% zapewniając podstawowe formatowanie.
+\vspace{0.8cm}
+\acronymlist
+${ for(acronyms) }
+\acronym{${ it.acronym }}{${ it.expansion }}
+${ endfor }
+%-------------
+% Załączniki
+%-------------
+
+% Obrazki i tabele w załącznikach nie trafiają do spisów
+\captionsetup[figure]{list=no}
+\captionsetup[table]{list=no}
+
+% Używając powyższych spisów jako szablonu,
+% możesz dodać również swój własny wykaz,
+% np. spis algorytmów.
+
+\end{document} % Dobranoc.
