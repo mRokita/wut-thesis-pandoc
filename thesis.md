@@ -31,6 +31,8 @@ test
 
 ## Statystyki
 
+> \lipsum[1]
+
 : Statystyki
 
 | test | jeden | 
