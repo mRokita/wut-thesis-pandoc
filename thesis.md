@@ -1,4 +1,5 @@
 ---
+# Informacje dotyczące pracy:
 title-pl: "{Tytuł pracy}"
 title-en: "{Thesis title}"
 author: "{Imię i Nazwisko}"
@@ -7,13 +8,6 @@ institute: "{Instytut}"
 faculty: "eiti"
 specialty: "{Specjalność}"
 subject: "{Kierunek}"
-thesistype: engineer # master lub engineer
-parindent: false # Wyłączenie akapitów
-citecolor: 77C000 # Kolor cytowań
-urlcolor: 0000FF # Kolor url
-filecolor: A50000 # Kolor plików
-linkcolor: A50000 # Kolor tekstu w spisie treści
-blockquotebordercolor: A50000
 promotor: "{Nazwisko Promotora}"
 abstract-pl: \lipsum[1-4]
 abstract-en: \lipsum[1-4]
@@ -21,14 +15,37 @@ bibliography:
 - bibliography.bib
 lang: pl
 keywords-pl: 
-    - Jabłko, Gruszka, Truskawka
+- Jabłko, Gruszka, Truskawka
 keywords-en:
-    - Apple, Pear, Strawberry
+- Apple, Pear, Strawberry
 acronyms:
-    - acronym: WEITI 
-      expansion: Wydział Elektroniki i Technik Informacyjnych
-    - acronym: YAML  
-      expansion: Yet Another Markup Language
+- acronym: WEITI 
+  expansion: Wydział Elektroniki i Technik Informacyjnych
+- acronym: YAML  
+  expansion: Yet Another Markup Language
+# Typ pracy (master lub engineer):
+thesistype: engineer
+# Wyłączenie akapitów:
+parindent: false 
+# Kolor cytowań:
+citecolor: 77C000
+# Kolor url:
+urlcolor: 0000FF 
+# Kolor plików:
+filecolor: A50000
+# Kolor tekstu w spisie treści:
+linkcolor: A50000
+# Kolor obramowania cytatów:
+blockquotebordercolor: A50000
+# Kolor tekstu cytatów
+blockquotetextcolor: 777777
+# Forsowanie numerów linii dla wszystkich fragmentów
+# (right, left, puste włącza użycie .numberLines Pandoc'a ):
+forcelinenos: "left" 
+# Kolor numerów linii:
+linenoscolor: AA0000
+# Kolor zaznaczenia linii z użyciem \emphasize
+emphasizecolor: FFEEEE
 ...
 
 # Test lorem ipsum
@@ -44,7 +61,8 @@ test
 
 | test | jeden | 
 |------|-------|
-| a    |   n   |
+| a    |   b   |  c
+| c    |   d   |  f
 
 
 ## Statystyki 2
@@ -83,13 +101,21 @@ Lista elementów:
 
 \lipsum[1]
 
-```python
+```bash
+wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
+wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
+wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
+```
+
+\setemphasize{2137-2138}
+```{.python .numberLines startFrom=2137}
 import asyncio
 from typing import Dict
 
 class Test:
     def __init__(self, data: Dict[int, int]):
         self.data = data
+        self.longvar = ("fsaaaaaaaaaaaaaa-aaaaaaaaaaaaaaaaa-aaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         
     async def hello(self) -> int:
         await asyncio.sleep(1)
@@ -98,5 +124,17 @@ class Test:
     def __repr__(self):
         return 'Hello'
 ```
+\unsetemphasize
+
+
+\setemphasize{{3,5}}
+```javascript
+let a = 1;
+function b (){
+    let fun = () => 1 
+    return a;
+}
+```
+\unsetemphasize
 
 \lipsum[3-4]

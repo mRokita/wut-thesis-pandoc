@@ -77,6 +77,17 @@ $endif$
 \providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+% LISTINGS SETUP
+% ------
+
+$if(listings)$
+
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+$endif$
+
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
@@ -101,20 +112,32 @@ $endfor$
 \definecolor{default-filecolor}{HTML}{$if(filecolor)$$filecolor$$else$000000$endif$}
 \definecolor{default-citecolor}{HTML}{$if(citecolor)$$citecolor$$else$000000$endif$}
 \definecolor{default-urlcolor}{HTML}{$if(urlcolor)$$urlcolor$$else$000000$endif$}
+\definecolor{linenums-color}{HTML}{$if(linenoscolor)$$linenoscolor$$else$000000$endif$}
+\definecolor{emphasizecolor}{HTML}{$if(emphasizecolor)$$emphasizecolor$$else$EEEEEE$endif$}
 \usepackage{mdframed}
 \newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
 \renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
 \item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
 
 $if(lhs)$
-%\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
 $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
-%\usepackage{fvextra}
+\usepackage{fvextra}
 
+\newcommand{\defineverbatim}[1]{\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, breakanywhere, highlightcolor=emphasizecolor, highlightlines=#1, breakbeforesymbolpre={}, $if(forcelinenos)$numbers=$forcelinenos$,$endif$commandchars=\\\{\}}}
+\defineverbatim{}
+\newcommand{\setemphasize}[1]{\defineverbatim{#1}}
+\newcommand{\unsetemphasize}{\defineverbatim{}}
+\renewcommand{\theFancyVerbLine}{\textcolor{linenums-color}{\arabic{FancyVerbLine}}}
+\renewcommand{\StringTok}[1]{%
+  \textcolor[rgb]{0.25,0.44,0.63}{%
+    \FancyVerbBreakStart#1\FancyVerbBreakStop}}
 
-\DefineVerbatimEnvironment{Verbatim}{Highlighting}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+\renewcommand{\NormalTok}[1]{%
+  \textcolor[rgb]{0.0,0.0,0.0}{%
+    \FancyVerbBreakStart#1\FancyVerbBreakStop}}
 
 $endif$
 \usepackage{graphicx}
@@ -188,6 +211,7 @@ $endfor$
 $for(include-before)$
 $include-before$
 $endfor$
+
 
 \begin{document}
 
