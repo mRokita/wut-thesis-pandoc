@@ -4,15 +4,20 @@ title-en: "{Thesis title}"
 author: "{Imię i Nazwisko}"
 album: "{Nr Albumu}"
 institute: "{Instytut}"
+faculty: "eiti"
 specialty: "{Specjalność}"
 subject: "{Kierunek}"
+citecolor: 77C000 # Kolor cytowań
+urlcolor: 0000FF # Kolor url
+filecolor: A50000 # Kolor plików
+linkcolor: A50000 # Kolor tekstu w spisie treści
+blockquotebordercolor: A50000
 promotor: "{Nazwisko Promotora}"
 abstract-pl: \lipsum[1-4]
 abstract-en: \lipsum[1-4]
 bibliography:
 - bibliography.bib
-biblio-title:
-- Bibliografia
+lang: pl
 keywords-pl: 
     - Jabłko, Gruszka, Truskawka
 keywords-en:
@@ -22,7 +27,6 @@ acronyms:
       expansion: Wydział Elektroniki i Technik Informacyjnych
     - acronym: YAML  
       expansion: Yet Another Markup Language
-citeproc: true
 ...
 
 # Test lorem ipsum

@@ -24,15 +24,54 @@
 % --
 % Wybór języka: \langpol, \langeng
 %-------------------------------------------------------------
-\facultyeiti    % Wydział Elektroniki i Technik Informacyjnych
+\faculty$faculty$    % Wydział Elektroniki i Technik Informacyjnych
+\newcommand{\langen}{\langeng}
+\newcommand{\langpl}{\langpol}
+\newcommand{\titlepl}{$title-pl$}
+\newcommand{\titleen}{$title-en$}
+\newcommand{\maintitle}{\title$lang$}
+
+\newcommand{\keywordspl}{$keywords-pl$}
+\newcommand{\keywordsen}{$keywords-en$}
+
 \EngineerThesis % Praca inżynierska
-\langpol % Praca w języku polskim
+$if(lang)$
+    \lang$lang$
+$else$
+    \langpol % Praca w języku polskim
+$endif$
 \usepackage{float}
 \usepackage{xcolor}
+$if(fontfamily)$
+$else$
 \usepackage[default]{sourcesanspro}
 \usepackage{sourcecodepro}
-\definecolor{blockquote-border}{RGB}{221,221,221}
-\definecolor{blockquote-text}{RGB}{119,119,119}
+$endif$
+
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$else$
+\usepackage{lmodern}
+$endif$
+$if(mainfont)$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$endif$
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
+$endfor$
+
+\definecolor{blockquote-border}{HTML}{$if(blockquotebordercolor)$$blockquotebordercolor$$else$C8C8DD$endif$}
+\definecolor{blockquote-text}{HTML}{$if(blockquotetextcolor)$$blockquotetextcolor$$else$777777$endif$}
+\definecolor{default-linkcolor}{HTML}{$if(linkcolor)$$linkcolor$$else$000000$endif$}
+\definecolor{default-filecolor}{HTML}{$if(filecolor)$$filecolor$$else$000000$endif$}
+\definecolor{default-citecolor}{HTML}{$if(citecolor)$$citecolor$$else$000000$endif$}
+\definecolor{default-urlcolor}{HTML}{$if(urlcolor)$$urlcolor$$else$000000$endif$}
 \usepackage{mdframed}
 \newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
 \renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
@@ -84,6 +123,19 @@ $endfor$
 \makeatother
 
 
+% Document metadata
+\hypersetup{
+  pdftitle={\maintitle},
+  pdfauthor={$author$},
+  pdflang={$lang$},
+  colorlinks=true,
+  linkcolor={default-linkcolor},
+  filecolor={default-filecolor},
+  citecolor={default-citecolor},
+  urlcolor={default-urlcolor},
+  pdfcreator={LaTeX via pandoc using github.com/mRokita/wut-thesis-pandoc},
+  pdfkeywords={\keywords$lang$}
+}
 
 \begin{document}
 
@@ -94,7 +146,7 @@ $endfor$
 \kierunek{$subject$}
 \specjalnosc{$specialty$}
 \title{
-    $title-pl$
+    \maintitle
 }
 % Tytuł po angielsku do angielskiego streszczenia
 % In english theses, you may remove this command
@@ -155,7 +207,7 @@ $body$
 
 \cleardoublepage % Zaczynamy od nieparzystej strony
 
-\nocite{*}
+\nocite{$if(nocite)$$nocite$$else$*$endif$}
 \printbibliography
 
 %--------------------------------------
