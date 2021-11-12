@@ -12,6 +12,6 @@ make
 
 # Przykład
 
-Plik wejściowy (markdown): https://github.com/mRokita/wut-thesis-pandoc/blob/main/thesis.md
+Plik wejściowy (markdown): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.md
 
-Plik wyjściowy (pdf): https://github.com/mRokita/wut-thesis-pandoc/blob/main/thesis.pdf
+Plik wyjściowy (pdf): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.pdf
