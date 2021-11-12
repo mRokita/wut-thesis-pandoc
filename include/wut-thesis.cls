@@ -11,8 +11,6 @@
     twoside
 ]{mwart}
 
-\newcommand{\headerpleiti}{}
-
 %----------------------------
 % Document class parameters
 %----------------------------

@@ -8,12 +8,26 @@
 %  Warsaw University of Technology, 2019-2021
 %-----------------------------------------------
 
+
 \documentclass[
     bindingoffset=5mm,  % Binding offset
     footnoteindent=3mm, % Footnote indent
-    hyphenation=true    % Hyphenation turn on/off
+    hyphenation=true,   % Hyphenation turn on/off
+    baseclass=article
 ]{include/wut-thesis}
 
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(parindent)$
+    \setlength\parindent{0.5cm}
+    \setlength\parskip{0pt}
+$else$
+    \setlength\parindent{0pt}
+    \setlength\parskip{4pt}
+$endif$
 
 %-------------------------------------------------------------
 % Wybór wydziału:
@@ -48,6 +62,15 @@ $else$
 \usepackage{sourcecodepro}
 $endif$
 
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% Avoid problems with \sout in headers with hyperref
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
@@ -78,12 +101,15 @@ $endfor$
 \item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
 
 $if(lhs)$
-\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+%\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
 $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
-\usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+%\usepackage{fvextra}
+
+
+\DefineVerbatimEnvironment{Verbatim}{Highlighting}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+
 $endif$
 \usepackage{graphicx}
 \usepackage[backend=biber]{biblatex}
@@ -97,6 +123,22 @@ $if(csl-refs)$
   {\par}
 $endif$
 
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% Avoid problems with \sout in headers with hyperref
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+
+% Change list style
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\setlist[itemize,1]{leftmargin=\leftmargin,label=$$\bullet$$, topsep=0pt}
+\setlist[itemize,2]{label=$$\circ$$}
+\setlist[itemize,3]{label=$$\diamond$$}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
@@ -136,6 +178,10 @@ $endfor$
   pdfcreator={LaTeX via pandoc using github.com/mRokita/wut-thesis-pandoc},
   pdfkeywords={\keywords$lang$}
 }
+
+$for(include-before)$
+$include-before$
+$endfor$
 
 \begin{document}
 
@@ -247,5 +293,8 @@ ${ endfor }
 % Używając powyższych spisów jako szablonu,
 % możesz dodać również swój własny wykaz,
 % np. spis algorytmów.
+$for(include-after)$
+$include-after$
 
+$endfor$
 \end{document} % Dobranoc.

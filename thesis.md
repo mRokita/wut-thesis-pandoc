@@ -7,6 +7,7 @@ institute: "{Instytut}"
 faculty: "eiti"
 specialty: "{Specjalność}"
 subject: "{Kierunek}"
+parindent: false # Wyłączenie akapitów
 citecolor: 77C000 # Kolor cytowań
 urlcolor: 0000FF # Kolor url
 filecolor: A50000 # Kolor plików
@@ -35,7 +36,8 @@ test
 
 ## Statystyki
 
-> \lipsum[1]
+> \lipsum[1]  
+> _Paulo Coelho_
 
 : Statystyki
 
@@ -69,9 +71,16 @@ eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum. [@
 
 # Rozdział 2
 
-- \lipsum[1]
-- \lipsum[2]
+\noindent
+Lista elementów:  
 
+- test
+    - a
+        - \lipsum[1]
+- test 2
+    - \lipsum[2]
+
+\lipsum[1]
 
 ```python
 import asyncio
