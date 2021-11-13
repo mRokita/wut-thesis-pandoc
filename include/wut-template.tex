@@ -13,7 +13,6 @@
     bindingoffset=5mm,  % Binding offset
     footnoteindent=3mm, % Footnote indent
     hyphenation=true,   % Hyphenation turn on/off
-    baseclass=article
 ]{include/wut-thesis}
 
 
@@ -131,13 +130,17 @@ $highlighting-macros$
 \newcommand{\setemphasize}[1]{\defineverbatim{#1}}
 \newcommand{\unsetemphasize}{\defineverbatim{}}
 \renewcommand{\theFancyVerbLine}{\textcolor{linenums-color}{\arabic{FancyVerbLine}}}
+
+\let\oldstringtok\StringTok
+
 \renewcommand{\StringTok}[1]{%
-  \textcolor[rgb]{0.25,0.44,0.63}{%
-    \FancyVerbBreakStart#1\FancyVerbBreakStop}}
+    \oldstringtok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
+
+
+\let\oldnormaltok\NormalTok
 
 \renewcommand{\NormalTok}[1]{%
-  \textcolor[rgb]{0.0,0.0,0.0}{%
-    \FancyVerbBreakStart#1\FancyVerbBreakStop}}
+    \oldnormaltok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
 
 $endif$
 \usepackage{graphicx}

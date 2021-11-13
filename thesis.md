@@ -107,8 +107,8 @@ wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elekt
 wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
 ```
 
-\setemphasize{2137-2138}
-```{.python .numberLines startFrom=2137}
+\setemphasize{{15,19-22}}
+```{.python .numberLines startFrom=13}
 import asyncio
 from typing import Dict
 
