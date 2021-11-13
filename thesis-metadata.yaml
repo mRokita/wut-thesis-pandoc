@@ -1,0 +1,63 @@
+# Informacje dotyczące pracy:
+title-pl: "{Tytuł pracy}"
+title-en: "{Thesis title}"
+author: "{Imię i Nazwisko}"
+album: "{Nr Albumu}"
+institute: "{Instytut}"
+faculty: "eiti"
+specialty: "{Specjalność}"
+subject: "{Kierunek}"
+promotor: "{Nazwisko Promotora}"
+abstract-pl: |
+    Pierwszy paragraf
+
+    Drugi paragraf
+
+    Trzeci paragraf
+
+    \lipsum[1]
+
+abstract-en: |
+    First paragraph
+
+    Second paragraph
+
+    Third paragraph
+
+    \lipsum[1]
+bibliography:
+- bibliography.bib
+lang: pl
+keywords-pl:
+- Jabłko, Gruszka, Truskawka
+keywords-en:
+- Apple, Pear, Strawberry
+acronyms:
+- acronym: WEITI
+  expansion: Wydział Elektroniki i Technik Informacyjnych
+- acronym: YAML
+  expansion: Yet Another Markup Language
+# Typ pracy (master lub engineer):
+thesistype: engineer
+# Wyłączenie akapitów:
+parindent: false
+# Kolor cytowań:
+citecolor: 77C000
+# Kolor url:
+urlcolor:  4576cc
+# Kolor plików:
+filecolor: A50000
+# Kolor tekstu w spisie treści:
+linkcolor:  4576cc
+# Kolor obramowania cytatów:
+blockquotebordercolor: 4576cc
+# Kolor tekstu cytatów
+blockquotetextcolor: 777777
+# Forsowanie numerów linii dla wszystkich fragmentów
+forcelinenos: false
+# Położenie numerów linii, right lub left
+linenos: right
+# Kolor numerów linii:
+linenoscolor: 4576cc
+# Kolor zaznaczenia linii z użyciem \emphasize
+emphasizecolor: c2d7fc
