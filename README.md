@@ -20,4 +20,4 @@ Konfiguracja i metadane (YAML): https://raw.githubusercontent.com/mRokita/wut-th
 
 ## Wyjście
 
-Plik wyjściowy (YAML): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.pdf
+Plik wyjściowy (PDF): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.pdf
