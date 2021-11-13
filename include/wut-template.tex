@@ -1,13 +1,8 @@
-
-% !TeX TS-program = pdflatexmk
-% !BIB TS-program = biber
-
 %-----------------------------------------------
 %  Engineer's & Master's Thesis Template
 %  Copyleft by Artur M. Brodzki & Piotr Woźniak
 %  Warsaw University of Technology, 2019-2021
 %-----------------------------------------------
-
 
 \documentclass[
     bindingoffset=5mm,  % Binding offset
@@ -19,6 +14,9 @@
 $for(header-includes)$
 $header-includes$
 $endfor$
+
+
+\usepackage[utf8]{inputenc}
 
 $if(parindent)$
     \setlength\parindent{0.5cm}
@@ -37,15 +35,15 @@ $endif$
 % --
 % Wybór języka: \langpol, \langeng
 %-------------------------------------------------------------
-\faculty$faculty$    % Wydział Elektroniki i Technik Informacyjnych
+\faculty$if(faculty)$$faculty$$else$eiti$endif$
 \newcommand{\langen}{\langeng}
 \newcommand{\langpl}{\langpol}
-\newcommand{\titlepl}{$title-pl$}
-\newcommand{\titleen}{$title-en$}
-\newcommand{\maintitle}{\title$lang$}
+\newcommand{\titlepl}{$if(title-pl)$$title-pl$$else$\{TYTUŁ PRACY\}$endif$}
+\newcommand{\titleen}{$if(title-pl)$$title-en$$else$\{THESIS TITLE\}$endif$}
+\newcommand{\maintitle}{\title$if(lang)$$lang$$else$pl$endif$}
 
-\newcommand{\keywordspl}{$keywords-pl$}
-\newcommand{\keywordsen}{$keywords-en$}
+\newcommand{\keywordspl}{$if(keywords-pl)$$keywords-pl$$else${SŁOWA KLUCZOWE}$endif$}
+\newcommand{\keywordsen}{$if(keywords-pl)$$keywords-en$$else${KEYWORDS}$endif$}
 
 \newcommand{\engineerthesis}{\EngineerThesis}
 \newcommand{\masterthesis}{\MasterThesis}
@@ -90,7 +88,6 @@ $endif$
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
-\usepackage{lmodern}
 $endif$
 $if(mainfont)$
   \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
@@ -125,9 +122,33 @@ $if(highlighting-macros)$
 $highlighting-macros$
 \usepackage{fvextra}
 
-\newcommand{\defineverbatim}[1]{\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, breakanywhere, highlightcolor=emphasizecolor, highlightlines=#1, breakbeforesymbolpre={}, $if(forcelinenos)$numbers=$forcelinenos$,$endif$commandchars=\\\{\}}}
+\newcommand{\defineverbatim}[1]{\DefineVerbatimEnvironment{FVHighlighting}{Verbatim}{breaklines, $if(forcelinenos)$numbers=$if(linenos)$$linenos$$else$left$endif$, $endif$breakanywhere, highlightcolor=emphasizecolor, highlightlines=#1, commandchars=\\\{\}}}
 \defineverbatim{}
+
+% This is to make environment settings take precedence over pandoc params.
+\makeatletter
+
+\define@key{highlight@keys}{numbers}{\def\highlight@numbers{#1}}%
+\define@key{highlight@keys}{firstnumber}{\def\highlight@firstnumber{#1}}%
+
+\renewenvironment{Highlighting}[1][]{
+    \setkeys{highlight@keys}{numbers=none,#1}
+    \VerbatimEnvironment
+    \ifthenelse{\equal{\highlight@numbers}{left}}{
+        \fvset{#1, numbers=$if(linenos)$ $linenos$$else$left$endif$}
+    }{
+        \fvset{#1, numbers=none}
+    }
+
+    \begin{FVHighlighting}}
+{
+    \end{FVHighlighting}
+}
+\makeatother
+
+
 \newcommand{\setemphasize}[1]{\defineverbatim{#1}}
+
 \newcommand{\unsetemphasize}{\defineverbatim{}}
 \renewcommand{\theFancyVerbLine}{\textcolor{linenums-color}{\arabic{FancyVerbLine}}}
 
@@ -136,11 +157,28 @@ $highlighting-macros$
 \renewcommand{\StringTok}[1]{%
     \oldstringtok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
 
+\let\oldinformationtok\InformationTok
+
+\renewcommand{\InformationTok}[1]{%
+    \oldinformationtok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
+
 
 \let\oldnormaltok\NormalTok
 
 \renewcommand{\NormalTok}[1]{%
     \oldnormaltok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
+
+
+\let\oldcommenttok\CommentTok
+
+\renewcommand{\CommentTok}[1]{%
+    \oldcommenttok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
+
+
+\let\oldothertok\OtherTok
+
+\renewcommand{\OtherTok}[1]{%
+    \oldothertok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
 
 $endif$
 \usepackage{graphicx}
@@ -208,7 +246,7 @@ $endfor$
   citecolor={default-citecolor},
   urlcolor={default-urlcolor},
   pdfcreator={LaTeX via pandoc using github.com/mRokita/wut-thesis-pandoc},
-  pdfkeywords={\keywords$lang$}
+  pdfkeywords={\keywords$if(lang)$$lang$$else$pl$endif$}
 }
 
 $for(include-before)$
@@ -221,20 +259,20 @@ $endfor$
 %------------------
 % Strona tytułowa
 %------------------
-\instytut{$institute$}
-\kierunek{$subject$}
-\specjalnosc{$specialty$}
+\instytut{$if(institute)$$institute$$else$\{INSTYTUT\}$endif$}
+\kierunek{$if(subject)$$subject$$else$\{KIERUNEK\}$endif$}
+\specjalnosc{$if(speciality)$$speciality$$else$\{SPECJANOŚĆ\}$endif$}
 \title{
     \maintitle
 }
 % Tytuł po angielsku do angielskiego streszczenia
 % In english theses, you may remove this command
 \engtitle{
-    $title-en$
+    $if(title-en)$$title-en$$else$\{TITLE ENG\}$endif$
 }
-\author{$author$}
-\album{$album$}
-\promotor{$promotor$}
+\author{$if(author)$$author$$else$\{AUTOR\}$endif$}
+\album{$if(album)$$album$$else$\{ALBUM\}$endif$}
+\promotor{$if(promotor)$$promotor$$else$\{PROMOTOR\}$endif$}
 \date{\the\year}
 \maketitle
 
@@ -242,15 +280,15 @@ $endfor$
 % Streszczenie po polsku
 %-------------------------
 \cleardoublepage % Zaczynamy od nieparzystej strony
-\streszczenie $abstract-pl$
-\slowakluczowe $keywords-pl$
+\streszczenie $if(abstract-pl)$$abstract-pl$$else$\{STRESZCZENIE\}$endif$
+\slowakluczowe \keywordspl
 
 %----------------------------
 % Streszczenie po angielsku
 %----------------------------
 \clearpage
-\abstract $abstract-en$
-\keywords $keywords-en$
+\abstract $if(abstract-en)$$abstract-en$$else$\{ABSTRACT\}$endif$
+\keywords \keywordsen
 
 %----------------------------
 % Oświadczenie o autorstwie
