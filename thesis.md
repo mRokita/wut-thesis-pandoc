@@ -1,25 +1,97 @@
 # Rozdział 1
 
-# Test lorem ipsum
+```markdown
+Test 1 2 3 _1 2 2_ *1 2 3*
+```
 
-test
+Test 1 2 3 _1 2 2_ *1 2 3*
 
-## Statystyki
+## Cytaty
 
-> \lipsum[1]  
+```markdown
+> \lipsum[1-2]  
 > _Paulo Coelho_
+```
+
+> \lipsum[1-2]  
+> _Paulo Coelho_
+
+## Cytowania
+
+> ```markdown
+> To jest cytowanie [@lion2010][@wombat2016] 
+> ```
+
+To jest cytowanie [@lion2010][@wombat2016] 
+
+\newpage
+## Notatki
+> ```markdown
+> Footnote [^studia]
+>
+> [^studia]: Studia elka: <https://studia.elka.pw.edu.pl> 
+> ```
+
+Footnote [^studia]
+
+[^studia]: Studia elka: <https://studia.elka.pw.edu.pl>
+
+## Tabele
+
+```markdown
+: Statystyki
+
+| jeden| dwa   | trzy| 
+|------|-------|-----|
+| a    |   b   |  c  |
+| c    |   *d* |  f  |
+```
 
 : Statystyki
 
-| test | jeden | 
-|------|-------|
-| a    |   b   |  c
-| c    |   d   |  f
+| jeden| dwa   | trzy| 
+|------|-------|-----|
+| a    |   b   |  c  |
+| c    |   *d* |  f  | 
 
 
-## Statystyki 2
+## Rysunki
 
-![Diagram Mermaid](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0NocmlzdG1hc10gLS0-fEdldCBtb25leXwgQihHbyBzaG9wcGluZylcbiAgICBCIC0tPiBDe0xldCBtZSB0aGlua31cbiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXVxuICAgIEMgLS0-fFR3b3wgRVtpUGhvbmVdXG4gICAgQyAtLT58VGhyZWV8IEZbQ2FyXVxuICAiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGFyayJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
+> ```{.markdown .numberLines}
+> ![Diagram Mermaid [@lion2010]](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0NocmlzdG1hc10gLS0-fEdldCBtb25leXwgQihHbyBzaG9wcGluZylcbiAgICBCIC0tPiBDe0xldCBtZSB0aGlua31cbiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXVxuICAgIEMgLS0-fFR3b3wgRVtpUGhvbmVdXG4gICAgQyAtLT58VGhyZWV8IEZbQ2FyXVxuICAiLCJtZXJtYWlkIjp7InRoZW1lIjoiYmFzZSJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
+> ```
+
+![Diagram Mermaid [@lion2010]](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0NocmlzdG1hc10gLS0-fEdldCBtb25leXwgQihHbyBzaG9wcGluZylcbiAgICBCIC0tPiBDe0xldCBtZSB0aGlua31cbiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXVxuICAgIEMgLS0-fFR3b3wgRVtpUGhvbmVdXG4gICAgQyAtLT58VGhyZWV8IEZbQ2FyXVxuICAiLCJtZXJtYWlkIjp7InRoZW1lIjoiYmFzZSJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
+
+## MathJax
+
+```markdown
+$1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+        \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+         \quad\quad \text{for $|q| < 1$}.$
+
+$$\frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+         1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+          {1+\frac{e^{-8\pi}} {1+\ldots} } } }$$
+
+$$
+\color{red}{\begin{pmatrix}a & b\\\ c & d\end{pmatrix}}
+$$
+```
+
+$1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+        \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+         \quad\quad \text{for $|q| < 1$}.$
+
+$$\frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+         1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+          {1+\frac{e^{-8\pi}} {1+\ldots} } } }$$
+
+$$
+\color{red}{\begin{pmatrix}a & b\\\ c & d\end{pmatrix}}
+$$
+
+$\begin{matrix} a & b \\ c & d \end{matrix}$
 
 ## Uwagi
 
@@ -42,7 +114,19 @@ eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum. [@
 
 # Rozdział 2
 
-\noindent
+## Listy
+
+> ```markdown
+> Lista elementów:  
+> 
+> - test
+>     - a
+>         - \lipsum[1]
+> - test 2
+>     - \lipsum[2]      
+> \lipsum[1]
+> ```
+
 Lista elementów:  
 
 - test
@@ -50,17 +134,57 @@ Lista elementów:
         - \lipsum[1]
 - test 2
     - \lipsum[2]
-
 \lipsum[1]
+
+
+## Kod źródłowy
+
+### Łamanie długiego tekstu
 
 ```bash
 wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
 wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
 wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elektroniki-i-Technik-Informacyjnych-PW
 ```
+                        
+\newpage
+### Zaznaczanie linii
 
-\setemphasize{{15,19-22}}
-```{.python .numberLines startFrom=13}
+\setemphasize{{1, 18, 20, 28}}
+> ~~~markdown
+> \setemphasize{{18-19,22-23}}
+> ```{#python1 .python .numberLines startFrom=13}
+> import asyncio
+> from typing import Dict
+> 
+> class Test:
+>     def __init__(self, data: Dict[int, int]):
+>         self.data = data
+>         self.longvar = ("fsaaaaaaaaaaaaaa-aaaaaaaaaaaaaaaaa-aaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+>         
+>     async def hello(self) ->  int:
+>         await asyncio.sleep(1)
+>         return 0
+>         
+>     def __repr__(self):
+>         return 'Hello'
+> ```
+> \unsetemphasize
+> 
+> \setemphasize{{3,5}}
+> ```javascript
+> let a = 1;
+> function b (){
+>     let fun = () =>  1 
+>     return a;
+> }
+> ```
+> \unsetemphasize
+> ~~~
+
+\newpage
+\setemphasize{{18-19,22-23}}
+```{#python1 .python .numberLines startFrom=13}
 import asyncio
 from typing import Dict
 
@@ -69,7 +193,7 @@ class Test:
         self.data = data
         self.longvar = ("fsaaaaaaaaaaaaaa-aaaaaaaaaaaaaaaaa-aaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         
-    async def hello(self) -> int:
+    async def hello(self) - int:
         await asyncio.sleep(1)
         return 0
         
@@ -77,6 +201,17 @@ class Test:
         return 'Hello'
 ```
 \unsetemphasize
+
+\setemphasize{{3,5}}
+```javascript
+let a = 1;
+function b (){
+    let fun = () => 1 
+    return a;
+}
+```
+\unsetemphasize
+
 
 
 \setemphasize{{3,5}}
@@ -89,4 +224,11 @@ function b (){
 ```
 \unsetemphasize
 
-\lipsum[3-4]
+### Odnośniki do kodu
+
+> ```markdown
+> [Kod python](#python1)
+> ```
+
+[Kod python](#python1)
+
