@@ -18,4 +18,6 @@ Plik wejściowy (Markdown): https://raw.githubusercontent.com/mRokita/wut-thesis
 
 Konfiguracja i metadane (YAML): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis-metadata.yaml
 
-Plik wyjściowy (YAML): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.pdf
+## Wyjście
+
+Plik wyjściowy (PDF): https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.pdf
