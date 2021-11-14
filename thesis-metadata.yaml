@@ -61,3 +61,6 @@ linenos: right
 linenoscolor: 4576cc
 # Kolor zaznaczenia linii z użyciem \emphasize
 emphasizecolor: c2d7fc
+# Rozmiar czcionki dla bloków kodu
+# Dostępne opcje: tiny, scriptsize, footnotesize, small, normalsize, large, Large, LARGE, huge, Huge
+codefontsize: footnotesize

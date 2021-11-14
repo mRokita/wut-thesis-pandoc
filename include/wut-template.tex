@@ -122,7 +122,7 @@ $if(highlighting-macros)$
 $highlighting-macros$
 \usepackage{fvextra}
 
-\newcommand{\defineverbatim}[1]{\DefineVerbatimEnvironment{FVHighlighting}{Verbatim}{breaklines, $if(forcelinenos)$numbers=$if(linenos)$$linenos$$else$left$endif$, $endif$breakanywhere, highlightcolor=emphasizecolor, highlightlines=#1, commandchars=\\\{\}}}
+\newcommand{\defineverbatim}[1]{\DefineVerbatimEnvironment{FVHighlighting}{Verbatim}{breaklines, fontsize=\$if(codefontsize)$$codefontsize$$else$footnotesize$endif$, $if(forcelinenos)$numbers=$if(linenos)$$linenos$$else$left$endif$, $endif$breakanywhere, highlightcolor=emphasizecolor, highlightlines=#1, commandchars=\\\{\}}}
 \defineverbatim{}
 
 % This is to make environment settings take precedence over pandoc params.
@@ -139,7 +139,6 @@ $highlighting-macros$
     }{
         \fvset{#1, numbers=none}
     }
-
     \begin{FVHighlighting}}
 {
     \end{FVHighlighting}
