@@ -122,11 +122,16 @@ $if(highlighting-macros)$
 $highlighting-macros$
 \usepackage{fvextra}
 
-\newcommand{\defineverbatim}[1]{\DefineVerbatimEnvironment{FVHighlighting}{Verbatim}{breaklines, fontsize=\$if(codefontsize)$$codefontsize$$else$footnotesize$endif$, $if(forcelinenos)$numbers=$if(linenos)$$linenos$$else$left$endif$, $endif$breakanywhere, highlightcolor=emphasizecolor, highlightlines=#1, commandchars=\\\{\}}}
-\defineverbatim{}
+\DefineVerbatimEnvironment{FVHighlighting}{Verbatim}{%
+    breaklines,%
+    fontsize=\$if(codefontsize)$$codefontsize$$else$footnotesize$endif$,%
+    $if(forcelinenos)$numbers=$if(linenos)$$linenos$$else$left$endif$, $endif$%
+    breakanywhere, highlightcolor=emphasizecolor, commandchars=\\\{\}}
 
 % This is to make environment settings take precedence over pandoc params.
 \makeatletter
+
+\newcommand{\highlightctx}{}
 
 \define@key{highlight@keys}{numbers}{\def\highlight@numbers{#1}}%
 \define@key{highlight@keys}{firstnumber}{\def\highlight@firstnumber{#1}}%
@@ -146,9 +151,9 @@ $highlighting-macros$
 \makeatother
 
 
-\newcommand{\setemphasize}[1]{\defineverbatim{#1}}
+\newcommand{\setemphasize}[1]{\fvset{highlightlines=#1}}
 
-\newcommand{\unsetemphasize}{\defineverbatim{}}
+\newcommand{\unsetemphasize}{\color{red}WARNING: unsetemphasize has been deprecated\color{black}}
 \renewcommand{\theFancyVerbLine}{\textcolor{linenums-color}{\arabic{FancyVerbLine}}}
 
 \let\oldstringtok\StringTok

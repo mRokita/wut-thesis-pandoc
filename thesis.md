@@ -150,7 +150,7 @@ wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elekt
 \newpage
 ### Zaznaczanie linii
 
-\setemphasize{{1, 18, 20, 28}}
+\setemphasize{{1, 19}}
 > ~~~markdown
 > \setemphasize{{18-19,22-23}}
 > ```{#python1 .python .numberLines startFrom=13}
@@ -169,7 +169,6 @@ wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elekt
 >     def __repr__(self):
 >         return 'Hello'
 > ```
-> \unsetemphasize
 > 
 > \setemphasize{{3,5}}
 > ```javascript
@@ -179,7 +178,6 @@ wget https://www.elka.pw.edu.pl/Badania-i-nauka/Katalog-uslug-B-R-Wydzialu-Elekt
 >     return a;
 > }
 > ```
-> \unsetemphasize
 > ~~~
 
 \newpage
@@ -200,7 +198,6 @@ class Test:
     def __repr__(self):
         return 'Hello'
 ```
-\unsetemphasize
 
 \setemphasize{{3,5}}
 ```javascript
@@ -210,7 +207,6 @@ function b (){
     return a;
 }
 ```
-\unsetemphasize
 
 ### Odnośniki do kodu
 
