@@ -5,7 +5,7 @@
 %-----------------------------------------------
 
 \documentclass[
-    bindingoffset=5mm,  % Binding offset
+    bindingoffset=$if(bindingoffset)$$bindingoffset$$else$5mm$endif$,  % TODO: Binding offset 5mm
     footnoteindent=3mm, % Footnote indent
     hyphenation=true,   % Hyphenation turn on/off
 ]{include/wut-thesis}
@@ -14,9 +14,6 @@
 $for(header-includes)$
 $header-includes$
 $endfor$
-
-
-\usepackage[utf8]{inputenc}
 
 $if(parindent)$
     \setlength\parindent{0.5cm}
@@ -58,13 +55,31 @@ $else$
     \langpol % Praca w języku polskim
 $endif$
 \usepackage{float}
-\usepackage{xcolor}
-$if(fontfamily)$
-$else$
-\usepackage[default]{sourcesanspro}
-\usepackage{sourcecodepro}
-$endif$
 
+$if(fixedplacement)$\floatplacement{figure}{H}$else$\floatplacement{figure}{htbp}$endif$
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\fi
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  $if(fontfamily)$
+  $else$
+  \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  $endif$
+\else % if not pdftex
+  $if(mainfont)$
+  $else$
+  \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  $endif$
+\fi
+\usepackage[htt]{hyphenat}
 $if(strikeout)$
 \usepackage[normalem]{ulem}
 % Avoid problems with \sout in headers with hyperref
@@ -76,13 +91,178 @@ $endif$
 
 % LISTINGS SETUP
 % ------
+$if(listings)$
+\makeatletter
+\renewcommand\l@lstlisting[2]{\@dottedtocline{1}{0.5em}{2.3em}{#1}{#2}}
+\makeatother
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{upquote}
+\newcommand{\passthrough}[1]{#1}
+$endif$
+%
+%
+% Listings
+%
+%
 
 $if(listings)$
 
-\usepackage{listings}
-\newcommand{\passthrough}[1]{#1}
-\lstset{defaultdialect=[5.3]Lua}
-\lstset{defaultdialect=[x86masm]Assembler}
+%
+% general listing colors
+%
+\definecolor{listing-background}{HTML}{$if(listing-background)$$listing-background$$else$ffffff$endif$}
+\definecolor{listing-rule}{HTML}{$if(listing-rule)$$listing-rule$$else$b3b2b3$endif$}
+\definecolor{listing-numbers}{HTML}{$if(listing-numbers)$$listing-numbers$$else$b3b2b3$endif$}
+\definecolor{listing-text-color}{HTML}{$if(listing-text)$$listing-text$$else$000000$endif$}
+\definecolor{listing-keyword}{HTML}{$if(listing-keyword)$$listing-keyword$$else$ff3b11$endif$}
+\definecolor{listing-keyword-2}{HTML}{$if(listing-keyword-2)$$listing-keyword-2$$else$bb6c15$endif$} % additional keywords
+\definecolor{listing-keyword-3}{HTML}{$if(listing-keyword-3)$$listing-keyword-3$$else$8400FF$endif$} % additional keywords
+\definecolor{listing-identifier}{HTML}{$if(listing-identifier)$$listing-keyword-3$$else$000000$endif$}
+\definecolor{listing-string}{HTML}{$if(listing-string)$$listing-string$$else$009933$endif$}
+\definecolor{listing-comment}{HTML}{$if(listing-comment)$$listing-comment$$else$8E8E8E$endif$}
+\usepackage{soul}
+\makeatletter
+\let\old@lstKV@SwitchCases\lstKV@SwitchCases
+\def\lstKV@SwitchCases#1#2#3{}
+\makeatother
+\usepackage{lstlinebgrd}
+\makeatletter
+\let\lstKV@SwitchCases\old@lstKV@SwitchCases
+
+\lst@Key{numbers}{none}{%
+    \def\lst@PlaceNumber{\lst@linebgrd}%
+    \lstKV@SwitchCases{#1}%
+    {none:\\%
+     left:\def\lst@PlaceNumber{\llap{\normalfont
+                \lst@numberstyle{\thelstnumber}\kern\lst@numbersep}\lst@linebgrd}\\%
+     right:\def\lst@PlaceNumber{\rlap{\normalfont
+                \kern\linewidth \kern\lst@numbersep
+                \lst@numberstyle{\thelstnumber}}\lst@linebgrd}%
+    }{\PackageError{Listings}{Numbers #1 unknown}\@ehc}}
+\makeatother
+\renewcommand{\lstlistingname}{Fragment kodu}
+\renewcommand\lstlistlistingname{Fragmenty kodu}
+\newcommand{\CodeEmphasis}[1]{\color{red}{\textit{#1}}}
+\newcommand{\CodeEmphasisLine}[1]{\color{red}{\textit{#1}}}
+\newcommand\digitstyle{\color{red}}
+\makeatletter
+\newcommand{\ProcessDigit}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\digitstyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+\usepackage{calc}
+\definecolor{lightGrey}{rgb}{0.9, 0.9, 0.9}
+\usepackage{accsupp}
+\lstset{
+    float,
+    xleftmargin      = 0em,
+    basicstyle=\color{listing-text-color}\linespread{1.0}%
+                      \lst@ifdisplaystyle%
+                      $if(code-block-font-size)$$code-block-font-size$$else$\small$endif$%
+                      \fi\ttfamily{},
+    $if(forcelinenos)$numbers   =   $linenos$,$else$numbers  =   none,$endif$
+    keywordstyle     = {\color{listing-keyword}},
+    keywordstyle     = {[2]\color{listing-keyword-2}},
+    keywordstyle     = {[3]\itshape\color{listing-keyword-3}},
+    stringstyle=\ttfamily\color{listing-string},
+    commentstyle=\color{listing-comment},
+    numberstyle=\color{listing-comment}\small,
+    stepnumber=1,
+    numbersep=5pt,
+    moredelim={**[is][\btHL<1>]{@1}{@}},
+    moredelim={**[is][{\btHL<2>}]{@2}{@}},
+    backgroundcolor=\color[RGB]{248,248,248},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    breaklines=true,
+    breakautoindent=true,
+                      columns=fullflexible,
+                      emphstyle=\underline,
+    escapeinside={(@}{@)},
+    linewidth=\textwidth,
+    basewidth=0.5em,
+    prebreak= \space,
+    backgroundcolor=\color{listing-background},
+    postbreak   = \space,
+    literate={ą}{{\k{a}}}1
+                {€}{{\textcolor{red}{$$\leftarrow$$}}}1
+                {Ą}{{\k{A}}}1
+                {ę}{{\k{e}}}1
+                {Ę}{{\k{E}}}1
+                {ó}{{\'o}}1
+                {Ó}{{\'O}}1
+                {ś}{{\'s}}1
+                {Ś}{{\'S}}1
+                {ł}{{\l{}}}1
+                {Ł}{{\L{}}}1
+                {ż}{{\.z}}1
+                {Ż}{{\.Z}}1
+                {ź}{{\'z}}1
+                {Ź}{{\'Z}}1
+                {ć}{{\'c}}1
+                {Ć}{{\'C}}1
+                {ń}{{\'n}}1
+                {Ń}{{\'N}}1,
+    morestring=[b]",
+    morestring=[b]',
+    morecomment=[l]\#
+}
+\lstdefinelanguage{dockerfile}{
+  upquote=true,
+  morekeywords={
+    RUN,COPY,ADD,FROM,LABEL,CMD,ENTRYPOINT,ENV,WORKDIR
+  },
+}
+\lstdefinelanguage{http}{
+upquote=true,
+sensitive,
+  morekeywords={
+    GET,POST,PUT,DELETE,PATCH,OPTIONS
+  },
+}
+\newcommand{\redarrow}{\BeginAccSupp{ActualText=}\textcolor{red}{\boldmath{$$\Longleftarrow$$}}\EndAccSupp{}}
+\lstdefinelanguage{Python}{
+upquote=true,
+  morekeywords={
+    with,async,await,break,lambda,match,if,while,for,return,yield,from,in,import,as,or,and,match,class,del,def,else,elif,assert,try,except,finally,not,is,raise
+  },
+  morekeywords={[3] % literals
+    % reserved words for literal values
+    self,cls,mcs,None,True,False,float,open,dict,int,len,list,set,zip,range,next,Exception,AttributeError,StopIteration,ReadOnlyProperty,property,abstractmethod,print,iter,__set__,__get__,__next__,__iter__,__delete__,__del__,__init__,__call__,__new__,__main__,str,bool,isinstance,ord,chr,id,hash,__new__,type
+  },
+morestring=[b]",
+    morestring=[b]',
+    morecomment=[l]\#,
+  sensitive,
+    literate={ą}{{\k{a}}}1
+                {€}{\redarrow}1
+                {Ą}{{\k{A}}}1
+                {ę}{{\k{e}}}1
+                {Ę}{{\k{E}}}1
+                {ó}{{\'o}}1
+                {Ó}{{\'O}}1
+                {ś}{{\'s}}1
+                {Ś}{{\'S}}1
+                {ł}{{\l{}}}1
+                {Ł}{{\L{}}}1
+                {ż}{{\.z}}1
+                {Ż}{{\.Z}}1
+                {ź}{{\'z}}1
+                {Ź}{{\'Z}}1
+                {ć}{{\'c}}1
+                {Ć}{{\'C}}1
+                {ń}{{\'n}}1
+                {Ń}{{\'N}}1
+}
 $endif$
 
 $if(fontfamily)$
@@ -102,8 +282,10 @@ $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
 $endfor$
 
+\usepackage{inconsolata}
+
 \definecolor{blockquote-border}{HTML}{$if(blockquotebordercolor)$$blockquotebordercolor$$else$C8C8DD$endif$}
-\definecolor{blockquote-text}{HTML}{$if(blockquotetextcolor)$$blockquotetextcolor$$else$777777$endif$}
+\definecolor{blockquote-text}{HTML}{$if(blockquotetextcolor)$$blockquotetextcolor$$else$333333$endif$}
 \definecolor{default-linkcolor}{HTML}{$if(linkcolor)$$linkcolor$$else$000000$endif$}
 \definecolor{default-filecolor}{HTML}{$if(filecolor)$$filecolor$$else$000000$endif$}
 \definecolor{default-citecolor}{HTML}{$if(citecolor)$$citecolor$$else$000000$endif$}
@@ -112,16 +294,12 @@ $endfor$
 \definecolor{emphasizecolor}{HTML}{$if(emphasizecolor)$$emphasizecolor$$else$EEEEEE$endif$}
 \usepackage{mdframed}
 \newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
-\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em\topmargin=1em}%
 \item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
 
-$if(lhs)$
-\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
-$endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 \usepackage{fvextra}
-
 \DefineVerbatimEnvironment{FVHighlighting}{Verbatim}{%
     breaklines,%
     fontsize=\$if(codefontsize)$$codefontsize$$else$footnotesize$endif$,%
@@ -150,10 +328,9 @@ $highlighting-macros$
 }
 \makeatother
 
-
 \newcommand{\setemphasize}[1]{\fvset{highlightlines=#1}}
 
-\newcommand{\unsetemphasize}{\color{red}WARNING: unsetemphasize has been deprecated\color{black}}
+\newcommand{\unsetemphasize}{\fvset{highlightlines=}}
 \renewcommand{\theFancyVerbLine}{\textcolor{linenums-color}{\arabic{FancyVerbLine}}}
 
 \let\oldstringtok\StringTok
@@ -185,6 +362,12 @@ $highlighting-macros$
     \oldothertok{\FancyVerbBreakStart#1\FancyVerbBreakStop}}
 
 $endif$
+
+$if(listings)$
+\newcommand{\setemphasize}[1]{}
+\newcommand{\unsetemphasize}[1]{}
+$endif$
+
 \usepackage{graphicx}
 \usepackage[backend=biber]{biblatex}
 
@@ -216,7 +399,7 @@ $endif$
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
-
+\captionsetup[subfloat]{margin=0.5em}
 % Redefine \includegraphics so that, unless explicit options are
 % given, the image width will not exceed the width or the height of the page.
 % Images get their normal width if they fit onto the page, but
@@ -259,6 +442,7 @@ $endfor$
 
 
 \begin{document}
+\counterwithin{lstlisting}{section}
 
 %------------------
 % Strona tytułowa
@@ -294,12 +478,7 @@ $endfor$
 \abstract $if(abstract-en)$$abstract-en$$else$\{ABSTRACT\}$endif$
 \keywords \keywordsen
 
-%----------------------------
-% Oświadczenie o autorstwie
-%----------------------------
-\cleardoublepage % Zaczynamy od nieparzystej strony
 \pagestyle{plain}
-\makeauthorship
 
 %--------------
 % Spis treści
@@ -316,9 +495,7 @@ $endfor$
  % Można też pisać rozdziały w jednym pliku.
 \clearpage % Zawsze zaczynamy rozdział od nowej strony
 
-\floatplacement{figure}{H}
-
-\setkeys{Gin}{width=\ScaleWidthIfNeeded,height=\ScaleHeightIfNeeded,keepaspectratio}%
+\setkeys{Gin}{width=0.9\textwidth,keepaspectratio}%
 
 $body$
 
@@ -327,8 +504,11 @@ $body$
 %---------------
 
 \cleardoublepage % Zaczynamy od nieparzystej strony
-
-\nocite{$if(nocite)$$nocite$$else$*$endif$}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+$if(nocite)$
+\nocite{*}
+$endif$
 \printbibliography
 
 %--------------------------------------
@@ -339,37 +519,31 @@ $body$
 
 \listoffigurestoc    % Spis rysunków.
 \vspace{1cm}         % vertical space
-
+$if(tables)$
 \listoftablestoc     % Spis tabel.
 \vspace{1cm}         % vertical space
+$endif$
 
+$if(listings)$
+\lstlistoflistings
+\addcontentsline{toc}{section}{\lstlistlistingname}
+\vspace{1cm}
+$endif$
+
+\vspace{1cm}
 $if(enableappendices)$
 \listofappendicestoc % Spis załączników
 $endif$
-% Wykaz symboli i skrótów.
-% Pamiętaj, żeby posortować symbole alfabetycznie
-% we własnym zakresie. Makro \acronymlist
-% generuje właściwy tytuł sekcji, w zależności od języka.
-% Makro \acronym dodaje skrót/symbol do listy,
-% zapewniając podstawowe formatowanie.
+
 \vspace{0.8cm}
+
 \acronymlist
 ${ for(acronyms) }
 \acronym{${ it.acronym }}{${ it.expansion }}
 ${ endfor }
-%-------------
-% Załączniki
-%-------------
 
-% Obrazki i tabele w załącznikach nie trafiają do spisów
-\captionsetup[figure]{list=no}
-\captionsetup[table]{list=no}
-
-% Używając powyższych spisów jako szablonu,
-% możesz dodać również swój własny wykaz,
-% np. spis algorytmów.
 $for(include-after)$
 $include-after$
 
 $endfor$
-\end{document} % Dobranoc.
+\end{document}

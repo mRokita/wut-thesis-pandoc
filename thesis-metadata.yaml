@@ -1,40 +1,53 @@
 # Informacje dotyczące pracy:
-title-pl: "{Tytuł pracy}"
-title-en: "{Thesis title}"
+title-pl: "System przetwarzania danych lokalizacyjnych w czasie rzeczywistym"
+title-en: "Programming Framework for Realtime Processing of Location Data"
 author: "{Imię i Nazwisko}"
-album: "{Nr Albumu}"
-institute: "{Instytut}"
+album: "{nr albumu}"
+institute: "{Nazwa Instytutu}"
 faculty: "eiti"
 speciality: "{Specjalność}"
 subject: "{Kierunek}"
-promotor: "{Nazwisko Promotora}"
+promotor: "{Promotor}"
 abstract-pl: |
-    Pierwszy paragraf
+  \lipsum[1-4]
 
-    Drugi paragraf
-
-    Trzeci paragraf
-
-    \lipsum[1]
 
 abstract-en: |
-    First paragraph
-
-    Second paragraph
-
-    Third paragraph
-
-    \lipsum[1]
+  \lipsum[1-4]
 bibliography:
 - bibliography.bib
 lang: pl
 keywords-pl:
-- Jabłko, Gruszka, Truskawka
+- Python, Strumienie, Redis, Docker, NoSQL, Skalowanie, Kontenery
 keywords-en:
-- Apple, Pear, Strawberry
+- Python, Streams, Redis, Docker, NoSQL, Scaling, Containers
 acronyms:
-- acronym: WEITI
-  expansion: Wydział Elektroniki i Technik Informacyjnych
+- acronym: ASGI
+  expansion: Asynchronous Server Gateway Interface
+- acronym: API
+  expansion: Aplication Programming Interface
+- acronym: CLI
+  expansion: Command Line Interface
+- acronym: CSS
+  expansion: Cascade Style Sheeets
+- acronym: GIL
+  expansion: Global Interpreter Lock
+- acronym: HTTP
+  expansion: Hypertext Transfer Protocol
+- acronym: JSON
+  expansion: JavaScript Object Notation
+- acronym: mTLS
+  expansion: Mutual Transport Layer Security
+- acronym: NoSQL
+  expansion: No Structured Query Language
+- acronym: ORM
+  expansion: Object-relational mapping
+- acronym: REST API
+  expansion: REpresentational State Transfer Aplication Programming Interface
+- acronym: TDD
+  expansion: Test Driven Development
+- acronym: WSGI
+  expansion: Python Web Server Gateway Interface
 - acronym: YAML
   expansion: Yet Another Markup Language
 # Typ pracy (master lub engineer):
@@ -42,25 +55,35 @@ thesistype: engineer
 # Wyłączenie akapitów:
 parindent: false
 # Kolor cytowań:
-citecolor: 77C000
+citecolor: "666666"
 # Kolor url:
-urlcolor:  4576cc
+urlcolor:  "444444"
 # Kolor plików:
-filecolor: A50000
+filecolor: "A50000"
 # Kolor tekstu w spisie treści:
-linkcolor:  4576cc
+linkcolor:  "000000"
+# Kolory dla --listings
+listing-background: FFFFFF
+listing-keyword: fb3b11
+listing-keyword-2: 8400FF
+listing-keyword-3: 000000
+listing-string: 009933
+listing-text: 000000
+listing-numbers: b3b2b3
+listing-comment: 8e8e8e
 # Kolor obramowania cytatów:
-blockquotebordercolor: 4576cc
+blockquotebordercolor: "4576cc"
 # Kolor tekstu cytatów
-blockquotetextcolor: 777777
+blockquotetextcolor: "333333"
 # Forsowanie numerów linii dla wszystkich fragmentów
-forcelinenos: false
+forcelinenos: true
 # Położenie numerów linii, right lub left
-linenos: right
+linenos: "left"
 # Kolor numerów linii:
-linenoscolor: 4576cc
-# Kolor zaznaczenia linii z użyciem \emphasize
-emphasizecolor: c2d7fc
+linenoscolor: "4576cc"
+# Kolor zaznaczenia linii z użyciem \emphasize, nie działa dla --listings, które jest rekomendowane,
+# ponieważ dla highlightingu z fvextra nie działa spis fragmentów kodu.
+emphasizecolor: "c2d7fc"
 # Rozmiar czcionki dla bloków kodu
 # Dostępne opcje: tiny, scriptsize, footnotesize, small, normalsize, large, Large, LARGE, huge, Huge
-codefontsize: footnotesize
+codefontsize: "footnotesize"
