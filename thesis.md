@@ -2,7 +2,6 @@
 
 ## Formatowanie tekstu
 
-###  Źródło
 
 ```markdown
 Test 1 2 3 _1 2 2_ **1 2 3**
@@ -24,6 +23,39 @@ Test 1 2 3 _1 2 2_ **1 2 3**
     - element c
 
 <https://elka.pw.edu.pl>
+
+## MathJax
+
+```markdown
+$1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+        \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+         \quad\quad \text{for $|q| < 1$}.$
+
+$$\frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+         1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+          {1+\frac{e^{-8\pi}} {1+\ldots} } } }$$
+
+$$
+\color{red}{\begin{pmatrix}a & b\\\ c & d\end{pmatrix}}
+$$
+```
+
+### Rezultat
+
+$1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+        \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+         \quad\quad \text{for $|q| < 1$}.$
+
+$$\frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+         1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+          {1+\frac{e^{-8\pi}} {1+\ldots} } } }$$
+
+$$
+\color{red}{\begin{pmatrix}a & b\\\ c & d\end{pmatrix}}
+$$
+
+$\begin{matrix} a & b \\ c & d \end{matrix}$
+
 
 ## Cytaty
 
