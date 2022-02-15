@@ -63,14 +63,6 @@ Footnote [^studia]
 ## Tabele
 
 ```markdown
-: Statystyki
-
-| jeden| dwa   | trzy| 
-|------|-------|-----|
-| a    |   b   |  c  |
-| c    |   *d* |  f  |
-```
-
 : Statystyki \label{tab:statsone}
 
 | jeden| dwa   | trzy| 
@@ -78,8 +70,17 @@ Footnote [^studia]
 | a    |   b   |  c  |
 | c    |   *d* |  f  | 
 
+Tabela \ref{tab:statsone}
+```
 
-### Odnośniki do tabel
+### Rezultat
+
+: Statystyki \label{tab:statsone}
+
+| jeden| dwa   | trzy| 
+|------|-------|-----|
+| a    |   b   |  c  |
+| c    |   *d* |  f  | 
 
 Tabela \ref{tab:statsone}
 
