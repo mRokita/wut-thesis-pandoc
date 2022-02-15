@@ -1,3 +1,29 @@
+# Konfiguracja
+
+## Instalacja zależności (Fedora)
+
+```
+sudo dnf install texlive-scheme-full pandoc pandoc-citeproc
+```
+
+## Użycie
+
+```
+git clone https://github.com/mRokita/wut-thesis-pandoc
+cd wut-thesis-pandoc
+make
+```
+
+## Źródła dokumentacji
+
+Plik wejściowy (Markdown): <https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.md>
+
+Konfiguracja i metadane (YAML): <https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis-metadata.yaml>
+
+Plik wyjściowy (PDF): <https://raw.githubusercontent.com/mRokita/wut-thesis-pandoc/main/thesis.pdf>
+
+\newpage
+
 # Przykłady
 
 ## Formatowanie tekstu
