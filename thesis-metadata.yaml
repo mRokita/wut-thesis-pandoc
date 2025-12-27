@@ -63,14 +63,14 @@ filecolor: "A50000"
 # Kolor tekstu w spisie treści:
 linkcolor:  "000000"
 # Kolory dla --listings
-listing-background: FFFFFF
-listing-keyword: fb3b11
-listing-keyword-2: 8400FF
-listing-keyword-3: 000000
-listing-string: 009933
-listing-text: 000000
-listing-numbers: b3b2b3
-listing-comment: 8e8e8e
+listing-background: "FFFFFF"
+listing-keyword: "fb3b11"
+listing-keyword-2: "8400FF"
+listing-keyword-3: "000000"
+listing-string: "009933"
+listing-text: "000000"
+listing-numbers: "b3b2b3"
+listing-comment: "8e8e8e"
 # Kolor obramowania cytatów:
 blockquotebordercolor: "4576cc"
 # Kolor tekstu cytatów
